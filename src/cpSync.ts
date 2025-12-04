@@ -115,9 +115,15 @@ function polyfillCpSync(src: string, dest: string, options?: CpSyncOptions): voi
   }
 }
 
+// Node 22.17+ has a bug where dereference option is ignored
+// https://github.com/nodejs/node/issues/59168
+const nodeVersion = process.versions.node.split('.').map(Number);
+const hasNativeDereferenceBug = (nodeVersion[0] === 22 && nodeVersion[1] >= 17) || nodeVersion[0] > 22;
+
 /**
  * Copy a file or directory synchronously.
  * Uses native fs.cpSync when available (Node 16.7+), falls back to polyfill.
+ * Uses polyfill when native has known bugs (dereference on Node 22.17+).
  *
  * @param src - Source path
  * @param dest - Destination path
@@ -127,10 +133,11 @@ function polyfillCpSync(src: string, dest: string, options?: CpSyncOptions): voi
  *   - dereference: Follow symlinks and copy targets (default: false)
  */
 function cpSync(src: string, dest: string, options?: CpSyncOptions): void {
-  if (fs.cpSync) {
-    fs.cpSync(src, dest, options);
-  } else {
+  // Use polyfill if native doesn't exist or has dereference bug
+  if (!fs.cpSync || (hasNativeDereferenceBug && options?.dereference)) {
     polyfillCpSync(src, dest, options);
+  } else {
+    fs.cpSync(src, dest, options);
   }
 }
 

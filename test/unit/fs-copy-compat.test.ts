@@ -204,12 +204,6 @@ describe('fs-copy-compat', () => {
       // Skip on Windows due to symlink permissions
       if (process.platform === 'win32') return this.skip();
 
-      // Skip on Node 22.17+ due to regression: https://github.com/nodejs/node/issues/59168
-      // Native fs.cpSync ignores dereference option in these versions
-      const nodeVersion = process.versions.node.split('.').map(Number);
-      const hasNativeBug = (nodeVersion[0] === 22 && nodeVersion[1] >= 17) || nodeVersion[0] > 22;
-      if (hasNativeBug && fs.cpSync) return this.skip();
-
       const srcDir = path.join(TMP_DIR, 'src-deref');
       const destDir = path.join(TMP_DIR, 'dest-deref');
 
@@ -229,11 +223,6 @@ describe('fs-copy-compat', () => {
     it('should dereference directory symlinks when dereference is true', function () {
       // Skip on Windows due to symlink permissions
       if (process.platform === 'win32') return this.skip();
-
-      // Skip on Node 22.17+ due to regression: https://github.com/nodejs/node/issues/59168
-      const nodeVersion = process.versions.node.split('.').map(Number);
-      const hasNativeBug = (nodeVersion[0] === 22 && nodeVersion[1] >= 17) || nodeVersion[0] > 22;
-      if (hasNativeBug && fs.cpSync) return this.skip();
 
       const srcDir = path.join(TMP_DIR, 'src-deref-dir');
       const destDir = path.join(TMP_DIR, 'dest-deref-dir');
