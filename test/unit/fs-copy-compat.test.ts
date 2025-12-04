@@ -1,9 +1,9 @@
 import assert from 'assert';
 import fs from 'fs';
 import { copyFile, copyFileSync, cpSync } from 'fs-copy-compat';
+import { safeRmSync } from 'fs-remove-compat';
 import mkdirp from 'mkdirp-classic';
 import path from 'path';
-import rimraf from 'rimraf2';
 import url from 'url';
 
 const ___filename = typeof __filename !== 'undefined' ? __filename : url.fileURLToPath(import.meta.url);
@@ -13,7 +13,7 @@ const TMP_DIR = path.join(___dirname, '..', '..', '.tmp');
 
 function cleanTmp() {
   try {
-    rimraf.sync(TMP_DIR, { disableGlob: true });
+    safeRmSync(TMP_DIR, { recursive: true, force: true });
   } catch (_e) {
     // ignore
   }

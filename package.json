@@ -50,8 +50,8 @@
   "devDependencies": {
     "@types/mocha": "*",
     "@types/node": "*",
+    "fs-remove-compat": "*",
     "node-version-use": "*",
-    "rimraf2": "*",
     "ts-dev-stack": "*",
     "tsds-config": "*"
   },
