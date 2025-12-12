@@ -1,6 +1,6 @@
 {
   "name": "fs-copy-compat",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Cross-platform file copy utilities with Node.js 0.8+ compatibility. Provides copyFile, copyFileSync, and cpSync with optimized fallbacks for older Node versions.",
   "keywords": [
     "fs",
