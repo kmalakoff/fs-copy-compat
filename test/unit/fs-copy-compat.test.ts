@@ -11,6 +11,8 @@ const ___dirname = path.dirname(___filename);
 
 const TMP_DIR = path.join(___dirname, '..', '..', '.tmp');
 
+const isWindows = process.platform === 'win32' || /^(msys|cygwin)$/.test(process.env.OSTYPE);
+
 function cleanTmp() {
   try {
     safeRmSync(TMP_DIR, { recursive: true, force: true });
@@ -151,7 +153,7 @@ describe('fs-copy-compat', () => {
 
     it('should preserve symlinks', function () {
       // Skip on Windows due to symlink permissions
-      if (process.platform === 'win32') return this.skip();
+      if (isWindows) return this.skip();
 
       const srcDir = path.join(TMP_DIR, 'src-symlink');
       const destDir = path.join(TMP_DIR, 'dest-symlink');
@@ -182,7 +184,7 @@ describe('fs-copy-compat', () => {
 
     it('should copy symlinks verbatim when verbatimSymlinks is true', function () {
       // Skip on Windows due to symlink permissions
-      if (process.platform === 'win32') return this.skip();
+      if (isWindows) return this.skip();
 
       const srcDir = path.join(TMP_DIR, 'src-verbatim');
       const destDir = path.join(TMP_DIR, 'dest-verbatim');
@@ -202,7 +204,7 @@ describe('fs-copy-compat', () => {
 
     it('should dereference symlinks when dereference is true', function () {
       // Skip on Windows due to symlink permissions
-      if (process.platform === 'win32') return this.skip();
+      if (isWindows) return this.skip();
 
       const srcDir = path.join(TMP_DIR, 'src-deref');
       const destDir = path.join(TMP_DIR, 'dest-deref');
@@ -222,7 +224,7 @@ describe('fs-copy-compat', () => {
 
     it('should dereference directory symlinks when dereference is true', function () {
       // Skip on Windows due to symlink permissions
-      if (process.platform === 'win32') return this.skip();
+      if (isWindows) return this.skip();
 
       const srcDir = path.join(TMP_DIR, 'src-deref-dir');
       const destDir = path.join(TMP_DIR, 'dest-deref-dir');
