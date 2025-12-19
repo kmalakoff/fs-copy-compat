@@ -44,13 +44,13 @@
   },
   "dependencies": {
     "is-absolute": "^1.0.0",
-    "mkdirp-classic": "^0.5.3",
+    "mkdirp-classic": "^0.5.2",
     "pump": "^3.0.3"
   },
   "devDependencies": {
     "@types/mocha": "*",
     "@types/node": "*",
-    "fs-remove-compat": "^0.2.5",
+    "fs-remove-compat": "^1.0.0",
     "node-version-use": "*",
     "ts-dev-stack": "*",
     "tsds-config": "*"
