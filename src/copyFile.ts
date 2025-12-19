@@ -7,7 +7,7 @@ export type CopyFileCallback = (err?: NodeJS.ErrnoException | null) => void;
  * Stream-based file copy fallback for Node < 8.5.0
  * Memory efficient - doesn't load entire file into memory
  */
-function streamCopyFile(src: string, dest: string, callback: CopyFileCallback): void {
+function streamCopyFile(src: string, dest: string, callback: CopyFileCallback) {
   fs.stat(src, (err) => {
     if (err) return callback(err);
     pump(fs.createReadStream(src), fs.createWriteStream(dest), callback);
