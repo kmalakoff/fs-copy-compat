@@ -11,7 +11,7 @@ const ___dirname = path.dirname(___filename);
 
 const TMP_DIR = path.join(___dirname, '..', '..', '.tmp');
 
-const isWindows = process.platform === 'win32' || /^(msys|cygwin)$/.test(process.env.OSTYPE);
+const isWindows = process.platform === 'win32' || /^(msys|cygwin)$/.test(process.env.OSTYPE ?? '');
 
 function cleanTmp() {
   try {

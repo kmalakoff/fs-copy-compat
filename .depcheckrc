@@ -1,1 +1,1 @@
-ignores: ["node-version-use", "ts-dev-stack", "fs-copy-compat"]
+ignores: ["fs-copy-compat", "node-version-use", "ts-dev-stack"]
